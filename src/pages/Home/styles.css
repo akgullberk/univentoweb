@@ -1,0 +1,90 @@
+.home-container {
+  width: 100%;
+}
+
+.top-banner {
+  background-color: #88141c;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  color: white;
+}
+
+.banner-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.banner-logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.circle-element {
+  width: 300px;
+  height: 70px;
+  background-color: #e06464;
+  border-radius: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+}
+
+.auth-container:first-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Üye Ol hover efektleri */
+.auth-container:first-child:hover ~ .auth-container {
+  background-color: transparent;
+}
+
+.auth-container:first-child:hover .auth-button {
+  color: #88141c;
+}
+
+.auth-container:first-child:hover {
+  background-color: white;
+  border-radius: 200px 0 0 200px;
+}
+
+/* Üye Girişi hover efektleri */
+.auth-container:last-child:hover {
+  background-color: white;
+  border-radius: 0 200px 200px 0;
+}
+
+.auth-container:last-child:hover .auth-button {
+  color: #88141c;
+}
+
+.auth-button {
+  padding: 8px 20px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.content {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+} 
