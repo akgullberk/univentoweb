@@ -17,6 +17,13 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div className="search-container">
+        <input 
+          type="text" 
+          className="search-input" 
+          placeholder="Etkinlik veya kategori ara..."
+        />
+      </div>
       <div className="content">
         <p>Bu sizin ana sayfanız</p>
       </div>
