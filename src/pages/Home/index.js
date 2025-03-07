@@ -23,6 +23,9 @@ const Home = () => {
           className="search-input" 
           placeholder="Etkinlik veya kategori ara..."
         />
+        <div className="search-button">
+          Ara
+        </div>
       </div>
       <div className="content">
         <p>Bu sizin ana sayfanız</p>
