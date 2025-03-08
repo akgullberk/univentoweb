@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleSearchClick = () => {
+    navigate('/kulup-sec');
+  };
+
   return (
     <div className="home-container">
       <div className="top-banner">
@@ -23,7 +30,7 @@ const Home = () => {
           className="search-input" 
           placeholder="Etkinlik veya kategori ara..."
         />
-        <div className="search-button">
+        <div className="search-button" onClick={handleSearchClick}>
           Ara
         </div>
       </div>

@@ -1,0 +1,9 @@
+.kulup-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.kulup-content {
+  max-width: 1300px;
+  margin: 0 auto;
+} 
