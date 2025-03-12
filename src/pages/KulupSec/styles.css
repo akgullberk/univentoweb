@@ -1,9 +1,69 @@
+html, body {
+  height: 100%; /* Tüm ekran yüksekliği için */
+  margin: 0; /* Varsayılan margin'i kaldır */
+}
+
 .kulup-container {
   width: 100%;
+  height: 100vh; /* Tüm ekranı kaplamak için yükseklik 100vh olarak ayarlandı */
   padding: 20px;
+  background-color: #88141c;
 }
 
 .kulup-content {
   max-width: 1300px;
   margin: 0 auto;
+}
+
+.kulup-search-container {
+  display: flex;
+  gap: 20px;
+}
+
+.kulup-search-input {
+  
+  height: 62px;
+  border-radius: 35px;
+  border: none;
+  padding: 0 35px;
+  font-size: 1.3rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Genişlik ayarlandı, istediğiniz değere göre değiştirebilirsiniz */
+}
+
+.kulup-search-input:focus {
+  outline: none;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.kulup-search-button {
+  width: 220px;
+  height: 70px;
+  background-color: white;
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.kulup-search-button:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 62px; /* Arama çubuğuyla aynı yükseklikte */
+  margin-left: -30px; /* İkonu arama çubuğuna yaklaştırmak için */
+}
+
+.kulup-description {
+  max-width: 400px; /* Arama çubuğunun genişliğiyle aynı olmasını sağlamak için ayarlandı */
+  margin: 0 auto; /* Ortalamak için */
 } 
