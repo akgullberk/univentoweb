@@ -4,10 +4,21 @@ html, body {
 }
 
 .kulup-container {
-  width: 100%;
-  height: 100vh; /* Tüm ekranı kaplamak için yükseklik 100vh olarak ayarlandı */
-  padding: 20px;
-  background-color: #88141c;
+  display: flex; /* Flexbox kullanarak iki paneli yan yana yerleştiriyoruz */
+  height: 100vh; /* Tüm ekran yüksekliği */
+}
+
+.left-panel {
+  width: 40%; /* Sol panelin genişliği %40 */
+  padding: 20px; /* İçerik için padding */
+  background-color: #88141c; /* Sol panel arka plan rengi */
+}
+
+.right-panel {
+  width: 60%; /* Sağ panelin genişliği %60 */
+  padding: 20px; /* İçerik için padding */
+  background-color: #88141c; /* Sağ panel arka plan rengi aynı yapıldı */
+  overflow-y: auto; /* İçerik taşarsa kaydırma çubuğu ekle */
 }
 
 .kulup-content {
@@ -17,15 +28,14 @@ html, body {
 
 .kulup-search-container {
   display: flex;
-  gap: 20px;
+  align-items: center; /* İkon ve input'un dikey olarak ortalanması için */
 }
 
 .kulup-search-input {
-  
   height: 62px;
   border-radius: 35px;
   border: none;
-  padding: 0 35px;
+  padding: 0 35px 0 15px; /* Sağdan padding ekleyerek ikon ile arama çubuğu arasında boşluk bırak */
   font-size: 1.3rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 400px; /* Genişlik ayarlandı, istediğiniz değere göre değiştirebilirsiniz */
@@ -55,15 +65,50 @@ html, body {
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
+.kulup-description {
+  max-width: 400px; /* Arama çubuğunun genişliğiyle aynı olmasını sağlamak için ayarlandı */
+  margin: 0 auto; /* Ortalamak için */
+}
+
+.card-container {
+  display: grid; /* Grid yapısı kullanarak 3 sütun oluşturuyoruz */
+  grid-template-columns: repeat(3, 1fr); /* 3 eşit sütun */
+  gap: 20px; /* Kartlar arasındaki boşluk */
+  margin-top: 20px; /* Üstten boşluk */
+}
+
+.card {
+  background-color: white; /* Kart arka plan rengi */
+  border-radius: 10px; /* Köşeleri yuvarlat */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+  padding: 20px; /* İçerik için padding */
+  text-align: center; /* Metni ortala */
+  cursor: pointer; /* Tıklanabilir olduğunu belirtmek için */
+  transition: all 0.3s ease; /* Geçiş efekti */
+}
+
+.card:hover {
+  background-color: #f0f0f0; /* Hover durumunda arka plan rengi değişimi */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Hover durumunda gölge efekti artırma */
+}
+
+.card-logo {
+  width: 100%; /* Logonun genişliği kartın genişliğine göre ayarlanır */
+  height: 150px; /* Tüm logolar için sabit yükseklik ayarlandı */
+  object-fit: contain; /* Logonun orantılı görünmesi için */
+  border-radius: 5px; /* Logonun köşelerini yuvarlat */
+}
+
+.card-name {
+  margin-top: 10px; /* İsim ile logo arasında boşluk */
+  font-size: 1.2rem; /* İsim yazı boyutu */
+  color: #88141c; /* İsim rengi */
+}
+
 .search-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 62px; /* Arama çubuğuyla aynı yükseklikte */
-  margin-left: -30px; /* İkonu arama çubuğuna yaklaştırmak için */
-}
-
-.kulup-description {
-  max-width: 400px; /* Arama çubuğunun genişliğiyle aynı olmasını sağlamak için ayarlandı */
-  margin: 0 auto; /* Ortalamak için */
+  margin-left: -40px; /* İkonu arama çubuğuna yaklaştırmak için */
 } 
