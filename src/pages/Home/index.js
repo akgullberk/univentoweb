@@ -9,16 +9,24 @@ const Home = () => {
     navigate('/kulup-sec');
   };
 
+  const handleRegisterClick = () => {
+    navigate('/register');
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   return (
     <div className="home-container">
       <div className="top-banner">
         <div className="banner-content">
           <div className="banner-logo">UniVento</div>
           <div className="circle-element">
-            <div className="auth-container">
+            <div className="auth-container" onClick={handleRegisterClick}>
               <span className="auth-button">Üye Ol</span>
             </div>
-            <div className="auth-container">
+            <div className="auth-container" onClick={handleLoginClick}>
               <span className="auth-button">Üye Girişi</span>
             </div>
           </div>
