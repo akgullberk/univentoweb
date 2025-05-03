@@ -1,0 +1,47 @@
+.user-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-name {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.user-email {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+}
+
+.hesap-button, .cikis-button {
+  background-color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.hesap-button {
+  color: #88141c;
+}
+
+.cikis-button {
+  color: #88141c;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.hesap-button:hover, .cikis-button:hover {
+  background-color: #f5f5f5;
+} 

@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../firebase/config';
+import UserHeader from '../../components/UserHeader';
 import './styles.css';
 
 const KulupSec = () => {
   const navigate = useNavigate();
   const [clubs, setClubs] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleClose = () => {
     navigate('/');
@@ -21,7 +33,7 @@ const KulupSec = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await fetch('http://16.170.205.160/clubs');
+        const response = await fetch('http://127.0.0.1:8000/clubs');
         const data = await response.json();
         setClubs(data);
       } catch (error) {
@@ -35,7 +47,10 @@ const KulupSec = () => {
   return (
     <div className="kulup-container">
       <div className="left-panel">
-        <h1 style={{ color: 'white', textAlign: "left", fontSize: "2.5rem" }}>UniVento</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <h1 style={{ color: 'white', textAlign: "left", fontSize: "2.5rem", margin: 0 }}>UniVento</h1>
+          {user && <UserHeader user={user} />}
+        </div>
         <div className="kulup-search-container">
           <input 
             type="text" 
@@ -75,7 +90,7 @@ const KulupSec = () => {
         <div className="kulup-content">
           <div className="card-container">
             {clubs.map((club) => (
-              <div key={club.id} className="card" onClick={() => handleCardClick(club.id)}>
+              <div key={club._id || club.id} className="card" onClick={() => handleCardClick(club._id || club.id)}>
                 <img src={club.logo_url} alt={club.name} className="card-logo" />
                 <div className="card-name">{club.name}</div>
               </div>

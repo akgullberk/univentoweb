@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config';
 import './styles.css';
 
@@ -15,14 +15,53 @@ const Login = () => {
     navigate('/register');
   };
 
+  const checkIfPresident = async (email, password) => {
+    try {
+      const response = await fetch('http://16.170.205.160/clubs');
+      const clubs = await response.json();
+      const presidentClub = clubs.find(
+        club => club.president_email === email && club.president_password === password
+      );
+      return presidentClub;
+    } catch (error) {
+      console.error('Kulüp başkanı kontrolü sırasında hata:', error);
+      return null;
+    }
+  };
+
   const handleLogin = async () => {
     try {
       setLoading(true);
       setError('');
+
+      // Önce kulüp başkanı kontrolü yap
+      const presidentClub = await checkIfPresident(email, password);
+      
+      if (presidentClub) {
+        try {
+          // Önce normal giriş yapmayı dene
+          await signInWithEmailAndPassword(auth, email, password);
+        } catch (signInError) {
+          if (signInError.code === 'auth/user-not-found') {
+            // Kullanıcı bulunamadıysa yeni hesap oluştur
+            await createUserWithEmailAndPassword(auth, email, password);
+          } else {
+            throw signInError;
+          }
+        }
+        // Kulüp bilgilerini localStorage'a kaydet
+        localStorage.setItem('presidentClub', JSON.stringify(presidentClub));
+        localStorage.setItem('userRole', 'president');
+      } else {
+        // Normal kullanıcı girişi
       await signInWithEmailAndPassword(auth, email, password);
+        localStorage.setItem('userRole', 'user');
+      }
+      
       // Başarılı giriş sonrası ana sayfaya yönlendir
       navigate('/');
     } catch (error) {
+      console.error('Giriş hatası:', error);
       switch (error.code) {
         case 'auth/invalid-email':
           setError('Geçersiz e-posta adresi.');
@@ -35,6 +74,12 @@ const Login = () => {
           break;
         case 'auth/wrong-password':
           setError('Hatalı şifre.');
+          break;
+        case 'auth/email-already-in-use':
+          setError('Bu e-posta adresi zaten kullanımda.');
+          break;
+        case 'auth/weak-password':
+          setError('Şifre en az 6 karakter olmalıdır.');
           break;
         default:
           setError('Giriş yapılırken bir hata oluştu.');
