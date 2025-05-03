@@ -82,7 +82,12 @@ const Home = () => {
       <div className="content">
         <div className="events-grid">
           {events.map((event, index) => (
-            <div key={index} className="event-card">
+            <div 
+              key={index} 
+              className="event-card"
+              onClick={() => navigate(`/event/${event.id}`, { state: { eventData: event } })}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="event-image">
                 <img 
                   src={getImageUrl(event.image_url)} 

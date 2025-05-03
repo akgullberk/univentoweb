@@ -6,6 +6,7 @@ import KulupSec from './pages/KulupSec';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import EventDetail from './pages/EventDetail';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/event/:eventId" element={<EventDetail />} />
         </Routes>
       </div>
     </Router>
