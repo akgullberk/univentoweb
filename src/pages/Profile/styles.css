@@ -1,15 +1,11 @@
 .profile-container {
-  width: 100%;
-  position: relative;
+  min-height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .top-banner {
   background-color: #88141c;
-  width: 100%;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  padding: 0;
+  padding: 20px 0;
   color: white;
 }
 
@@ -20,40 +16,94 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+  padding: 0 20px;
 }
 
 .banner-logo {
   font-size: 2.5rem;
   font-weight: bold;
-  letter-spacing: 1px;
 }
 
 .profile-content {
-  padding: 20px;
   max-width: 1300px;
-  margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-.profile-card, .event-form-card {
+/* Menü Grid Stilleri */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+.menu-card {
   background: white;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-card h2, .event-form-card h2 {
-  color: #333;
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.menu-icon {
+  font-size: 3rem;
   margin-bottom: 20px;
+}
+
+.menu-card h3 {
+  color: #333;
+  margin: 0 0 10px 0;
   font-size: 1.5rem;
 }
 
+.menu-card p {
+  color: #666;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Profil Kartı Stilleri */
+.profile-card {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
+}
+
 .profile-info {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -64,87 +114,23 @@
 }
 
 .info-group label {
+  font-weight: bold;
   color: #666;
-  font-size: 0.9rem;
 }
 
-.info-group p, .info-group a {
-  color: #333;
-  font-size: 1.1rem;
+.info-group p {
   margin: 0;
-}
-
-.info-group a {
-  color: #88141c;
-  text-decoration: none;
-}
-
-.info-group a:hover {
-  text-decoration: underline;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
   color: #333;
-  font-weight: 500;
 }
 
-.form-group input, .form-group textarea {
-  width: 100%;
-  padding: 12px;
+.profile-input {
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
 }
 
-.form-group textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-.form-group input:focus, .form-group textarea:focus {
-  outline: none;
-  border-color: #88141c;
-}
-
-.submit-button {
-  background-color: #88141c;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #a02a2a;
-}
-
-.error-message {
-  color: #dc3545;
-  margin: 10px 0;
-  padding: 10px;
-  background-color: #f8d7da;
-  border-radius: 5px;
-}
-
-.success-message {
-  color: #28a745;
-  margin: 10px 0;
-  padding: 10px;
-  background-color: #d4edda;
-  border-radius: 5px;
-}
-
-.edit-button, .save-button, .update-button {
+.edit-button, .save-button, .update-button, .submit-button {
   padding: 8px 20px;
   border: none;
   border-radius: 5px;
@@ -158,79 +144,123 @@
   color: #333;
 }
 
-.save-button, .update-button {
+.save-button, .update-button, .submit-button {
   background-color: #88141c;
   color: white;
-  width: 100%;
 }
 
 .edit-button:hover {
   background-color: #e0e0e0;
 }
 
-.save-button:hover, .update-button:hover {
-  background-color: #a02a2a;
+.save-button:hover, .update-button:hover, .submit-button:hover {
+  background-color: #6b1016;
 }
 
-.clubs-list {
+/* Form Stilleri */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #666;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Katılım İstekleri Stilleri */
+.requests-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
-.club-item {
+.request-item {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  background-color: #f8f8f8;
+}
+
+.request-info {
+  flex: 1;
+}
+
+.request-info p {
+  margin: 5px 0;
+}
+
+.request-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.approve-button, .reject-button {
+  padding: 8px 20px;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
   transition: all 0.3s ease;
 }
 
-.club-item:hover {
-  background-color: #f0f0f0;
-}
-
-.club-name {
-  font-weight: 500;
-  color: #333;
-}
-
-.join-date {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.alert {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 15px 25px;
-  border-radius: 5px;
+.approve-button {
+  background-color: #4CAF50;
   color: white;
-  animation: slideIn 0.3s ease;
 }
 
-.alert-success {
-  background-color: #4caf50;
+.reject-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.approve-button:hover {
+  background-color: #45a049;
+}
+
+.reject-button:hover {
+  background-color: #da190b;
+}
+
+/* Alert Stilleri */
+.alert {
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
 }
 
 .alert-error {
-  background-color: #f44336;
+  background-color: #fee;
+  color: #c00;
+  border: 1px solid #fcc;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.alert-success {
+  background-color: #efe;
+  color: #0c0;
+  border: 1px solid #cfc;
 }
 
+/* Resim Yükleme Stilleri */
 .image-upload-container {
   display: flex;
   flex-direction: column;
@@ -270,4 +300,118 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+.clubs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.club-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.club-item:hover {
+  background-color: #f0f0f0;
+}
+
+.club-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.join-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Etkinlikler Listesi Stilleri */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.event-item {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.event-item:hover {
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.event-info h3 {
+  color: #333;
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+}
+
+.event-info p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.event-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.view-requests-button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #88141c;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.view-requests-button:hover {
+  background-color: #6b1016;
+}
+
+.delete-button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #da190b;
+}
+
+.status-active, .status-past {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.status-active {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-past {
+  background-color: #f5f5f5;
+  color: #757575;
 } 

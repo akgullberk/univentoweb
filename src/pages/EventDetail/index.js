@@ -36,26 +36,27 @@ const EventDetail = () => {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/event-participants', {
+      const formData = new FormData();
+      formData.append('email', user.email);
+
+      const response = await fetch(`http://16.170.205.160/api/events/${eventId}/participate`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          event_id: eventId,
-          user_id: user.uid
-        })
+        body: formData
       });
 
       if (!response.ok) {
-        throw new Error('Etkinliğe katılım başarısız oldu.');
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Etkinliğe katılım başarısız oldu.');
       }
 
+      const data = await response.json();
       setIsParticipating(true);
-      setSuccess('Etkinliğe başarıyla katıldınız!');
+      setSuccess(data.message || 'Etkinliğe başarıyla katıldınız!');
       setTimeout(() => setSuccess(''), 3000);
     } catch (error) {
-      setError('Etkinliğe katılırken bir hata oluştu.');
+      console.error('Katılım hatası:', error);
+      setError(error.message || 'Etkinliğe katılırken bir hata oluştu.');
+      setTimeout(() => setError(''), 3000);
     }
   };
 

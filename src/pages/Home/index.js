@@ -9,6 +9,8 @@ const Home = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [events, setEvents] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -21,9 +23,10 @@ const Home = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/events');
+        const response = await fetch('http://16.170.205.160/api/events');
         const data = await response.json();
         setEvents(data);
+        setFilteredEvents(data);
       } catch (error) {
         console.error('Etkinlikler yüklenirken hata oluştu:', error);
       }
@@ -31,6 +34,19 @@ const Home = () => {
 
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    const filtered = events.filter(event => 
+      event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.details.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredEvents(filtered);
+  }, [searchTerm, events]);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   const handleSearchClick = () => {
     navigate('/kulup-sec');
@@ -74,14 +90,16 @@ const Home = () => {
           type="text" 
           className="search-input" 
           placeholder="Etkinlik veya kategori ara..."
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
         <div className="search-button" onClick={handleSearchClick}>
-          Ara
+          Kulüpler
         </div>
       </div>
       <div className="content">
         <div className="events-grid">
-          {events.map((event, index) => (
+          {filteredEvents.map((event, index) => (
             <div 
               key={index} 
               className="event-card"

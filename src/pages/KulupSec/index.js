@@ -3,12 +3,13 @@ import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase/config';
-import UserHeader from '../../components/UserHeader';
 import './styles.css';
 
 const KulupSec = () => {
   const navigate = useNavigate();
   const [clubs, setClubs] = useState([]);
+  const [filteredClubs, setFilteredClubs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -19,23 +20,13 @@ const KulupSec = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleClose = () => {
-    navigate('/');
-  };
-
-  const handleCardClick = (clubId) => {
-    // Burada kulüp bilgilerini görüntülemek için yönlendirme yapabilirsiniz
-    console.log(`Kulüp ID: ${clubId} tıklandı!`);
-    // Örneğin, kulüp detay sayfasına yönlendirme yapabilirsiniz
-    // navigate(`/club/${clubId}`);
-  };
-
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/clubs');
+        const response = await fetch('http://16.170.205.160/clubs');
         const data = await response.json();
         setClubs(data);
+        setFilteredClubs(data);
       } catch (error) {
         console.error('Error fetching clubs:', error);
       }
@@ -44,18 +35,41 @@ const KulupSec = () => {
     fetchClubs();
   }, []);
 
+  useEffect(() => {
+    const filtered = clubs.filter(club => 
+      club.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (club.category && club.category.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (club.advisor && club.advisor.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (club.president && club.president.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+    setFilteredClubs(filtered);
+  }, [searchTerm, clubs]);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleClose = () => {
+    navigate('/');
+  };
+
+  const handleCardClick = (clubId) => {
+    navigate(`/club/${clubId}`);
+  };
+
   return (
     <div className="kulup-container">
       <div className="left-panel">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <h1 style={{ color: 'white', textAlign: "left", fontSize: "2.5rem", margin: 0 }}>UniVento</h1>
-          {user && <UserHeader user={user} />}
         </div>
         <div className="kulup-search-container">
           <input 
             type="text" 
             className="kulup-search-input"
             placeholder="Kulüp Ara"
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
           <div className="search-icon">
             <FaSearch style={{ color: 'gray', fontSize: '1.5rem' }} />
@@ -89,7 +103,7 @@ const KulupSec = () => {
       <div className="right-panel">
         <div className="kulup-content">
           <div className="card-container">
-            {clubs.map((club) => (
+            {filteredClubs.map((club) => (
               <div key={club._id || club.id} className="card" onClick={() => handleCardClick(club._id || club.id)}>
                 <img src={club.logo_url} alt={club.name} className="card-logo" />
                 <div className="card-name">{club.name}</div>
